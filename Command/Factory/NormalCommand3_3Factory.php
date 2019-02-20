@@ -8,7 +8,7 @@
 
 require_once 'FactoryInterface.php';
 
-class NormalCommandFactory implements FactoryInterface
+class NormalCommand3_3Factory implements FactoryInterface
 {
     private $commands;
 
