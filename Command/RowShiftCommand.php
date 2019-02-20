@@ -6,15 +6,10 @@
  * Time: 14:33
  */
 
-require_once '../Board.php';
-require_once '../Action/ShiftArray.php';
+require_once 'ArrayConverter/ArrayConverterInterface.php';
 require_once 'CommandInterface.php';
 
-/**
- * コマンドAを実行して変更後の行列を返す
- *
- * Class
- */
+
 class RowShiftCommand implements CommandInterface
 {
     private $index;
@@ -26,12 +21,11 @@ class RowShiftCommand implements CommandInterface
         $this->arrayConverter = $arrayConverter;
     }
 
-
     public function execute(Board $board): Board
     {
         $srcRow = $board->getRow($this->index);
 
-        $dstRow = $this->arrayConverter->execute($srcRow);
+        $dstRow = $this->arrayConverter->execute($srcRow, $board);
 
         return $board->setRow($this->index, $dstRow);
     }

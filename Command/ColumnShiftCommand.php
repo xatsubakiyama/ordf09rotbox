@@ -6,32 +6,27 @@
  * Time: 14:33
  */
 
-require_once '../Board.php';
-require_once '../Action/ShiftArray.php';
+require_once 'ArrayConverter/ArrayConverterInterface.php';
 require_once 'CommandInterface.php';
 
-/**
- * コマンドAを実行して変更後の行列を返す
- *
- * Class
- */
+
 class ColumnShiftCommand implements CommandInterface
 {
-    private $action;
+    private $index;
+    private $arrayConverter;
 
-    public function __construct($action)
+    public function __construct(int $index, ArrayConverterInterface $arrayConverter)
     {
-        $this->action = $action;
+        $this->index = $index;
+        $this->arrayConverter = $arrayConverter;
     }
-
 
     public function execute(Board $board): Board
     {
-        $srcRow = $board->getRow(0);
+        $srcColumn = $board->getColumn($this->index);
 
-        $dstRow = $this->action->shiftFirstToLast($srcRow);
+        $dstColumn = $this->arrayConverter->execute($srcColumn, $board);
 
-        return $board->setRow(0, $dstRow);
+        return $board->setColumn($this->index, $dstColumn);
     }
-
 }
