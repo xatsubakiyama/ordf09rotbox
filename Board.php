@@ -6,22 +6,46 @@
  * Time: 16:44
  */
 
+
+/**
+ * 最新の行列のデータを持っておく（持って回らなくて良い）
+ *
+ * Class Board
+ */
 class Board
 {
-    private $boardMatrix = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9],
-    ];
+    /**
+     * @var array 現在の状態を表す行列
+     */
+    private $matrix;
 
-
-    public function getBoardMatrix(): array
+    /**
+     * 正しい行列かどうかを判断してから行列を初期化する
+     *
+     * Board constructor.
+     * @param array $matrix
+     */
+    public function __construct(array $matrix)
     {
-        return $this->boardMatrix;
+        $count = count($matrix);
+
+        for ($i = 0; $i < $count - 1; $i++)
+        {
+            if (count($matrix[$i]) !== count($matrix[$i + 1])) {
+                exit("正しい行列を入力してください");
+            }
+        }
+        $this->matrix = $matrix;
+    }
+
+
+    public function getMatrix(): array
+    {
+        return $this->matrix;
     }
 
     /**
-     * 行列から指定された行を返す
+     * 最新の行列から指定された行を返す
      *
      * @param int $index 行列の行を指定するindex(0スタート)
      *
@@ -29,26 +53,25 @@ class Board
      */
     public function getRow(int $index): array
     {
-        return $this->boardMatrix[$index];
+        return $this->matrix[$index];
     }
 
     /**
-     * 行列の指定された行を変更して変更後の行列を返す
+     * 最新の行列の指定された行を変更して変更後の行列を返す（最新の状態を持っておくクラスだから更新できてれば良いため、返さなくても良い）
      *
      * @param int $index
      *
      * @param array $row
-     * @return array
+     * @return $this
      */
-    public function setRow(int $index, array $row): array
+    public function setRow(int $index, array $row): self
     {
-        $this->boardMatrix[$index] = $row;
-
-        return $this->boardMatrix;
+        $this->matrix[$index] = $row;
+        return $this;
     }
 
     /**
-     * 行列から指定された列を返す
+     * 最新の行列から指定された列を返す
      *
      * @param int $index
      *
@@ -58,67 +81,47 @@ class Board
     {
         $column = [];
 
-        for($i = 0; $i < 3; $i++)
-        {
-            $column[$i] = $this->boardMatrix[$i][$index];
+        for ($i = 0; $i < $this->countElementOfColumn(); $i++) {
+            $column[$i] = $this->matrix[$i][$index];
         }
 
         return $column;
     }
 
     /**
-     * 行列の指定された列を変更して変更後の行列を返す
+     * 最新の行列の指定された列を変更して変更後の行列を返す（最新の状態を持っておくクラスだから更新できてれば良いため、返さなくても良い）
      *
      * @param int $index
      *
      * @param array $column
-     * @return array
+     * @return $this
      */
-    public function setColumn(int $index, array $column): array
+    public function setColumn(int $index, array $column): self
     {
-        $this->boardMatrix[0][$index] = $column[0];
-        $this->boardMatrix[1][$index] = $column[1];
-        $this->boardMatrix[2][$index] = $column[2];
-
-        return $this->boardMatrix;
+        for ($i = 0; $i < $this->countElementOfColumn(); $i++) {
+            $this->matrix[$i][$index] = $column[$i];
+        }
+        return $this;
     }
-
 
     /**
-     * 最初の値を最後に移動して変更後の行または列を返す
+     * 行の要素の数を返す
      *
-     * @param array $arr
-     * @return array
+     * @return int
      */
-    public function swapArray(array $arr): array
-    {
+//    public function countElementOfRow(): int
+//    {
+//        return count($this->matrix[0]);
+//    }
+//
+//    /**
+//     * 列の要素の数（行の数）を返す
+//     *
+//     * @return int
+//     */
+//    public function countElementOfColumn(): int
+//    {
+//        return count($this->matrix);
+//    }
 
-        $dstArr = [];
-
-        $dstArr[0] = $arr[1];
-        $dstArr[1] = $arr[2];
-        $dstArr[2] = $arr[0];
-
-
-        return $dstArr;
-    }
-
-
-    /**
-     * 最後の値を最初に移動して変更後の行または列を返す
-     *
-     * @param array $arr
-     * @return array
-     */
-    public function swapReverseArray(array $arr): array
-    {
-        $dstArr = [];
-
-        $dstArr[0] = $arr[2];
-        $dstArr[1] = $arr[0];
-        $dstArr[2] = $arr[1];
-
-
-        return $dstArr;
-    }
 }
