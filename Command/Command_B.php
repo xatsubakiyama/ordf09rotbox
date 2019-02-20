@@ -6,8 +6,7 @@
  * Time: 14:33
  */
 
-require_once '../Board.php';
-require_once '../Action/ShiftArray.php';
+require_once 'ArrayConverter/ShiftFirstToLastConverter.php';
 require_once 'CommandInterface.php';
 
 /**
@@ -17,19 +16,13 @@ require_once 'CommandInterface.php';
  */
 class Command_B implements CommandInterface
 {
-    private $action;
-
-    public function __construct($action)
-    {
-        $this->action = $action;
-    }
 
     public function execute(Board $board): Board
     {
         $srcRow = $board->getRow(1);
 
-        $swap = new ShiftArray;
-        $dstRow = $swap->shiftFirstToLast($srcRow);
+        $converter = new ShiftFirstToLastConverter();
+        $dstRow = $converter->execute($srcRow);
 
         return $board->setRow(1, $dstRow);
     }

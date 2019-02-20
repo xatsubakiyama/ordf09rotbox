@@ -6,8 +6,7 @@
  * Time: 14:33
  */
 
-require_once '../Board.php';
-require_once '../Action/ShiftArray.php';
+require_once 'ArrayConverter/ShiftFirstToLastConverter.php';
 require_once 'CommandInterface.php';
 
 /**
@@ -21,8 +20,8 @@ class Command_J implements CommandInterface
     {
         $srcColumn = $board->getColumn(2);
 
-        $swap = new ShiftArray;
-        $dstColumn = $swap->shiftFirstToLast($srcColumn);
+        $converter = new ShiftFirstToLastConverter();
+        $dstColumn = $converter->execute($srcColumn);
 
         return $board->setColumn(2, $dstColumn);
     }

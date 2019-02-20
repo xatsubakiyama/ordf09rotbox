@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: tsubakiyama
- * Date: 2019/02/08
- * Time: 14:46
- */
+
+require_once __DIR__.'/../Board.php';
 
 interface CommandInterface
 {
