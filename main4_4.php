@@ -18,16 +18,21 @@ $initialBoard = new Board([
 ]);
 
 $factory = new NormalCommand4_4Factory();
-
-$commandString = 'abefklop';
-
-for($i = 0; $i < strlen($commandString); $i++)
-{
-    /** @var CommandInterface $command */
-    $command = $factory->createCommand($commandString[$i]);
-    $finalBoard = $command->execute($initialBoard);
-}
-
 $printer = new Printer();
-$printer->print($finalBoard);
+
+$commandString = '';
+
+if($commandString == NULL)
+{
+    $printer->print($initialBoard);
+
+}else {
+    for ($i = 0; $i < strlen($commandString); $i++) {
+        /** @var CommandInterface $command */
+        $command = $factory->createCommand($commandString[$i]);
+        $finalBoard = $command->execute($initialBoard);
+    }
+
+    $printer->print($finalBoard);
+}
 

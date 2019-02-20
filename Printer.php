@@ -6,17 +6,26 @@
  * Time: 17:57
  */
 
-class Printer3_3
+require_once 'Board.php';
+
+class Printer
 {
     public function print(Board $board)
     {
         $dstMatrix = $board->getMatrix();
 
-        for ($i = 0; $i < 3; $i++) {
-            for ($k = 0; $k < 3; $k++) {
+        $maxColumn = count($dstMatrix);
+        $maxRow = count($dstMatrix[0]);
+
+        for ($i = 0; $i < $maxColumn; $i++) {
+            for ($k = 0; $k < $maxRow; $k++) {
                 echo $dstMatrix[$i][$k];
+
+                if ($k !== $maxRow - 1) {
+                    echo ',';
+                }
             }
-            if ($i !== 2) {
+            if ($i !== $maxColumn - 1) {
                 echo "/";
             }
         }

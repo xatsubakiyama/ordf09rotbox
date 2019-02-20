@@ -8,29 +8,27 @@
 
 require_once 'Board.php';
 require_once 'Printer.php';
-require_once 'Command/Factory/NormalCommand4_4Factory.php';
+require_once 'Command/Factory/NormalCommand3_4Factory.php';
 
 $initialBoard = new Board([
-    [1,2,3,4],
-    [5,6,7,8],
-    [9,10,11,12],
-    [13,14,15,16],
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12],
 ]);
 
-$factory = new NormalCommand4_4Factory();
+$factory = new NormalCommand3_4Factory();
 $printer = new Printer();
 
 $commandString = '';
 
-if($commandString == NULL)
-{
+if ($commandString == null) {
     $printer->print($initialBoard);
-
-}else {
+} else {
+//    var_dump($commandString);
     for ($i = 0; $i < strlen($commandString); $i++) {
         /** @var CommandInterface $command */
         $command = $factory->createCommand($commandString[$i]);
         $finalBoard = $command->execute($initialBoard);
     }
+    $printer->print($finalBoard);
 }
-

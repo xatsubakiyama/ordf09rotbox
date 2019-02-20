@@ -1,18 +1,9 @@
 <?php
 
 require_once 'Board.php';
-require_once 'Command/Command_A.php';
-require_once 'Command/Command_B.php';
-require_once 'Command/Command_C.php';
-require_once 'Command/Command_D.php';
-require_once 'Command/Command_E.php';
-require_once 'Command/Command_F.php';
-require_once 'Command/Command_G.php';
-require_once 'Command/Command_H.php';
-require_once 'Command/Command_I.php';
-require_once 'Command/Command_J.php';
-require_once 'Command/Command_K.php';
-require_once 'Command/Command_L.php';
+require_once 'Printer.php';
+require_once 'Command/Factory/NormalCommand3_3Factory.php';
+
 
 
 $board = new Board([
@@ -21,31 +12,31 @@ $board = new Board([
     [7, 8, 9],
 ]);
 
-$commands = array(
-    'a' => new Command_A(),
-    'b' => new Command_B(),
-    'c' => new Command_C(),
-    'd' => new Command_D(),
-    'e' => new Command_E(),
-    'f' => new Command_F(),
-    'g' => new Command_G(),
-    'h' => new Command_H(),
-    'i' => new Command_I(),
-    'j' => new Command_J(),
-    'k' => new Command_K(),
-    'l' => new Command_L(),
-);
+//$commands = array(
+//    'a' => new RowShiftCommand(0, new ShiftFirstToLastConverter()),
+//    'b' => new RowShiftCommand(1, new ShiftFirstToLastConverter()),
+//    'c' => new RowShiftCommand(2, new ShiftFirstToLastConverter()),
+//    'd' => new ColumnShiftCommand(0, new ShiftLastToFirstConverter()),
+//    'e' => new ColumnShiftCommand(1, new ShiftLastToFirstConverter()),
+//    'f' => new ColumnShiftCommand(2, new ShiftLastToFirstConverter()),
+//    'g' => new RowShiftCommand(2, new ShiftLastToFirstConverter()),
+//    'h' => new RowShiftCommand(1, new ShiftLastToFirstConverter()),
+//    'i' => new RowShiftCommand(0, new ShiftLastToFirstConverter()),
+//    'j' => new ColumnShiftCommand(2, new ShiftFirstToLastConverter()),
+//    'k' => new ColumnShiftCommand(1, new ShiftFirstToLastConverter()),
+//    'l' => new ColumnShiftCommand(0, new ShiftFirstToLastConverter()),
+//);
 
+$factory = new NormalCommand3_3Factory();
 
-
-
-$commandString = 'hkijbglfaced';
+$commandString = 'd';
 
 for ($i = 0; $i < strlen($commandString); $i++) {
     /** @var CommandInterface $command */
-    $command = $commands[$commandString[$i]];
+    $command = $factory->createCommand($commandString[$i]);
     $board = $command->execute($board);
 }
 
 
-var_dump($board);
+$printer = new Printer();
+$printer->print($board);
