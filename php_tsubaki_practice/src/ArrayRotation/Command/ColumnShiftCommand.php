@@ -22,6 +22,12 @@ class ColumnShiftCommand implements CommandInterface
         $this->arrayConverter = $arrayConverter;
     }
 
+    /**
+     * 列の要素を入れ替えて行列を返す
+     *
+     * @param Board $board
+     * @return Board
+     */
     public function execute(Board $board): Board
     {
         $srcColumn = $board->getColumn($this->index);
