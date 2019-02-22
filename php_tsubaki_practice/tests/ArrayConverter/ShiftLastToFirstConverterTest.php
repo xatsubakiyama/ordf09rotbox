@@ -6,7 +6,7 @@
  * Time: 16:30
  */
 
-namespace Tsubakiyama\PhpPracticePackage;
+namespace Tsubakiyama\PhpPracticePackage\ArrayConverter;
 
 
 use PHPUnit\Framework\TestCase;
