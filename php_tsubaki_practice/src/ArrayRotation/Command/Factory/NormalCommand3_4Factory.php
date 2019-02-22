@@ -8,8 +8,6 @@
 
 namespace Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\Factory;
 
-
-
 use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ArrayConverter\ShiftFirstToLastConverter;
 use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ArrayConverter\ShiftLastToFirstConverter;
 use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ColumnShiftCommand;

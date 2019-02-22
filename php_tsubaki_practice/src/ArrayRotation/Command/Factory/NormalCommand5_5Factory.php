@@ -6,6 +6,13 @@
  * Time: 14:35
  */
 
+namespace Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\Factory;
+
+use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ArrayConverter\ShiftFirstToLastConverter;
+use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ArrayConverter\ShiftLastToFirstConverter;
+use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ColumnShiftCommand;
+use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\CommandInterface;
+use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\RowShiftCommand;
 
 class NormalCommand5_5Factory implements FactoryInterface
 {
