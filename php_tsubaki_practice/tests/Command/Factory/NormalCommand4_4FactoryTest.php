@@ -6,7 +6,7 @@
  * Time: 17:19
  */
 
-namespace Tsubakiyama\PhpPracticePackage\Factory;
+namespace Tsubakiyama\PhpPracticePackage\Command\Factory;
 
 use PHPUnit\Framework\TestCase;
 use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ArrayConverter\ShiftFirstToLastConverter;
