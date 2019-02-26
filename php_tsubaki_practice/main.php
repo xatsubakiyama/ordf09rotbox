@@ -14,13 +14,21 @@ use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\Factory\NormalCommand3_
 use Tsubakiyama\PhpPracticePackage\ArrayRotation\Printer;
 
 
-
-
-$board = new Board([
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-]);
+//$board = new Board([
+//    [1, 2, 3],
+//    [4, 5],
+//    [7, 8, 9],
+//]);
+try {
+    $board = new Board([
+        [1, 2, 3],
+        [4, 5],
+        [7, 8, 9],
+    ]);
+} catch (InvalidArgumentException $e) {
+    echo $e->getMessage();
+    exit();
+}
 
 $factory = new NormalCommand3_3Factory();
 

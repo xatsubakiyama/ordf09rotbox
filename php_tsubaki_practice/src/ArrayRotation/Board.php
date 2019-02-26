@@ -8,6 +8,9 @@
 
 namespace Tsubakiyama\PhpPracticePackage\ArrayRotation;
 
+use InvalidArgumentException;
+
+
 /**
  * 最新の行列のデータを持っておく（持って回らなくて良い）
  *
@@ -19,6 +22,7 @@ class Board
      * @var array 現在の状態を表す行列
      */
     private $matrix;
+
 
     /**
      * 正しい行列かどうかを判断してから行列を初期化する
@@ -32,9 +36,20 @@ class Board
 
         for ($i = 0; $i < $count - 1; $i++) {
             if (count($matrix[$i]) !== count($matrix[$i + 1])) {
-                exit("正しい行列を入力してください");
+                throw new InvalidArgumentException('正しい行列を入力してください。');
             }
         }
+//        try {
+//            for ($i = 0; $i < $count - 1; $i++) {
+//                if (count($matrix[$i]) !== count($matrix[$i + 1])) {
+//                    throw new InvalidArgumentException('正しい行列を入力してください。');
+//                }
+//            }
+//        } catch (InvalidArgumentException $exception) {
+//            echo $exception->getMessage();
+//
+//        }
+
         $this->matrix = $matrix;
     }
 
