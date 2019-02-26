@@ -11,8 +11,10 @@ namespace Tsubakiyama\PhpPracticePackage\Command;
 
 use PHPUnit\Framework\TestCase;
 use Tsubakiyama\PhpPracticePackage\ArrayRotation\Board;
+use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ArrayConverter\ShiftFirstToLastConverter;
 use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ArrayConverter\ShiftLastToFirstConverter;
 use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ColumnShiftCommand;
+use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\RowShiftCommand;
 
 /**
  * 指定された列の要素を入れ替えて行列を返す
@@ -20,7 +22,7 @@ use Tsubakiyama\PhpPracticePackage\ArrayRotation\Command\ColumnShiftCommand;
  * Class ColumnShiftCommandTest
  * @package Tsubakiyama\PhpPracticePackage\Command
  */
-class ColumnShiftCommandTest extends TestCase
+class RowShiftCommandTest extends TestCase
 {
     /**
      * @param $index
@@ -36,12 +38,11 @@ class ColumnShiftCommandTest extends TestCase
             [7, 8, 9],
         ]);
 
-        $shiftColumn = new ColumnShiftCommand($index, $arrayConverter);
+        $shiftColumn = new RowShiftCommand($index, $arrayConverter);
         /** @var Board $dstMatrix */
         $dstMatrix = $shiftColumn->execute($board);
         /** @var array $actualMatrix */
         $actualMatrix = $dstMatrix->getMatrix();
-
 
         $this->assertEquals($expectedMatrix, $actualMatrix);
     }
@@ -50,13 +51,13 @@ class ColumnShiftCommandTest extends TestCase
     {
         /** @var array $dstMatrix */
         $dstMatrix = [
-            [7, 2, 3],
-            [1, 5, 6],
-            [4, 8, 9],
+            [2, 3, 1],
+            [4, 5, 6],
+            [7, 8, 9],
         ];
 
         return [
-            [0, new ShiftLastToFirstConverter(), $dstMatrix],
+            [0, new ShiftFirstToLastConverter(), $dstMatrix],
         ];
     }
 }
